@@ -24,7 +24,7 @@ namespace WindowsFormsApp2
             SqlConnection cnn;
             string ds = @"DESKTOP-B4R6OUU\SQLEXPRESS";
             string db = listBox1.GetItemText(listBox1.SelectedItem);
-            connetionString = $@"Data Source={ds};Initial Catalog={db};integrated Security=SSPI";
+            connetionString = $@"Data Source={ds};Initial Catalog={db};user=AJ;password=rawness";
             using (cnn = new SqlConnection(connetionString)) //idisposable
             {
                 try
@@ -70,7 +70,7 @@ namespace WindowsFormsApp2
             SqlConnection cnn;
             string ds = @"DESKTOP-B4R6OUU\SQLEXPRESS";
             string db = listBox1.GetItemText(listBox1.SelectedItem);
-            connetionString = $@"Data Source={ds};Initial Catalog={db};integrated Security=SSPI";
+            connetionString = $@"Data Source={ds};Initial Catalog={db};user=AJ;password=rawness";
             using (cnn = new SqlConnection(connetionString))
             {
                 try
@@ -110,7 +110,7 @@ namespace WindowsFormsApp2
             SqlConnection cnn;
             string ds = @"DESKTOP-B4R6OUU\SQLEXPRESS";
             string db = listBox1.GetItemText(listBox1.SelectedItem);
-            connetionString = $@"Data Source={ds};Initial Catalog={db};integrated Security=SSPI";
+            connetionString = $@"Data Source={ds};Initial Catalog={db};user=AJ;password=rawness";
             using (cnn = new SqlConnection(connetionString))
             {
                 try
@@ -148,7 +148,7 @@ namespace WindowsFormsApp2
             SqlConnection cnn;
             string ds = @"DESKTOP-B4R6OUU\SQLEXPRESS";
             string db = listBox1.GetItemText(listBox1.SelectedItem);
-            connetionString = $@"Data Source={ds};Initial Catalog={db};integrated Security=SSPI";
+            connetionString = $@"Data Source={ds};Initial Catalog={db};user=AJ;password=rawness";
             using (cnn = new SqlConnection(connetionString))
             {
                 try
@@ -188,7 +188,7 @@ namespace WindowsFormsApp2
             string connetionString;
             SqlConnection cnn;
             string ds = @"DESKTOP-B4R6OUU\SQLEXPRESS";
-            connetionString = $@"Data Source={ds};integrated Security=SSPI"; //use data source to get list of databases
+            connetionString = $@"Data Source={ds};user=AJ;password=rawness"; //use data source to get list of databases
             using (cnn = new SqlConnection(connetionString))
             {
                 try
