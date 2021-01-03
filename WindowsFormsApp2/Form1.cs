@@ -22,7 +22,7 @@ namespace WindowsFormsApp2
         {
             string connetionString;
             SqlConnection cnn;
-            string ds = @"DESKTOP-B4R6OUU\SQLEXPRESS";
+            string ds = @"192.168.1.14\SQLEXPRESS,1434";
             string db = listBox1.GetItemText(listBox1.SelectedItem);
             connetionString = $@"Data Source={ds};Initial Catalog={db};user=AJ;password=rawness";
             using (cnn = new SqlConnection(connetionString)) //idisposable
@@ -68,7 +68,7 @@ namespace WindowsFormsApp2
         {
             string connetionString;
             SqlConnection cnn;
-            string ds = @"DESKTOP-B4R6OUU\SQLEXPRESS";
+            string ds = @"192.168.1.14\SQLEXPRESS,1434";
             string db = listBox1.GetItemText(listBox1.SelectedItem);
             connetionString = $@"Data Source={ds};Initial Catalog={db};user=AJ;password=rawness";
             using (cnn = new SqlConnection(connetionString))
@@ -108,7 +108,7 @@ namespace WindowsFormsApp2
         {
             string connetionString;
             SqlConnection cnn;
-            string ds = @"DESKTOP-B4R6OUU\SQLEXPRESS";
+            string ds = @"192.168.1.14\SQLEXPRESS,1434";
             string db = listBox1.GetItemText(listBox1.SelectedItem);
             connetionString = $@"Data Source={ds};Initial Catalog={db};user=AJ;password=rawness";
             using (cnn = new SqlConnection(connetionString))
@@ -146,7 +146,7 @@ namespace WindowsFormsApp2
         {
             string connetionString;
             SqlConnection cnn;
-            string ds = @"DESKTOP-B4R6OUU\SQLEXPRESS";
+            string ds = @"192.168.1.14\SQLEXPRESS,1434";
             string db = listBox1.GetItemText(listBox1.SelectedItem);
             connetionString = $@"Data Source={ds};Initial Catalog={db};user=AJ;password=rawness";
             using (cnn = new SqlConnection(connetionString))
@@ -187,7 +187,7 @@ namespace WindowsFormsApp2
         {
             string connetionString;
             SqlConnection cnn;
-            string ds = @"DESKTOP-B4R6OUU\SQLEXPRESS";
+            string ds = @"192.168.1.14\SQLEXPRESS,1434";
             connetionString = $@"Data Source={ds};user=AJ;password=rawness"; //use data source to get list of databases
             using (cnn = new SqlConnection(connetionString))
             {
