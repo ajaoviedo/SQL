@@ -13,15 +13,21 @@ namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
+        string connetionString;
+        SqlConnection cnn;
+
+        private async Task CnnOpen() //prevent blocking when connecting to server
+        {
+            await Task.Factory.StartNew(()=> cnn.Open());
+        }
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            string connetionString;
-            SqlConnection cnn;
             string ds = @"192.168.1.14\SQLEXPRESS,1434";
             string db = listBox1.GetItemText(listBox1.SelectedItem);
             connetionString = $@"Data Source={ds};Initial Catalog={db};User ID=AJ;Password=rawness";
@@ -29,7 +35,7 @@ namespace WindowsFormsApp2
             {
                 try
                 {
-                    cnn.Open();
+                    await CnnOpen();
                     SqlCommand cmd;
                     SqlDataReader dr;
                     String sql, outp = "";
@@ -64,10 +70,8 @@ namespace WindowsFormsApp2
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
-            string connetionString;
-            SqlConnection cnn;
             string ds = @"192.168.1.14\SQLEXPRESS,1434";
             string db = listBox1.GetItemText(listBox1.SelectedItem);
             connetionString = $@"Data Source={ds};Initial Catalog={db};User ID=AJ;Password=rawness";
@@ -75,7 +79,7 @@ namespace WindowsFormsApp2
             {
                 try
                 {
-                    cnn.Open();
+                    await CnnOpen();
                     SqlCommand cmd;
                     String sql = "";
                     String tablename = listBox2.GetItemText(listBox2.SelectedItem); //get selected table
@@ -104,10 +108,8 @@ namespace WindowsFormsApp2
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void button3_Click(object sender, EventArgs e)
         {
-            string connetionString;
-            SqlConnection cnn;
             string ds = @"192.168.1.14\SQLEXPRESS,1434";
             string db = listBox1.GetItemText(listBox1.SelectedItem);
             connetionString = $@"Data Source={ds};Initial Catalog={db};User ID=AJ;Password=rawness";
@@ -115,7 +117,7 @@ namespace WindowsFormsApp2
             {
                 try
                 {
-                    cnn.Open();
+                    await CnnOpen();
                     SqlCommand cmd;
                     String sql = "";
                     String tablename = listBox2.GetItemText(listBox2.SelectedItem); //get selected table
@@ -142,10 +144,8 @@ namespace WindowsFormsApp2
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private async void button4_Click(object sender, EventArgs e)
         {
-            string connetionString;
-            SqlConnection cnn;
             string ds = @"192.168.1.14\SQLEXPRESS,1434";
             string db = listBox1.GetItemText(listBox1.SelectedItem);
             connetionString = $@"Data Source={ds};Initial Catalog={db};User ID=AJ;Password=rawness";
@@ -153,7 +153,7 @@ namespace WindowsFormsApp2
             {
                 try
                 {
-                    cnn.Open();
+                    await CnnOpen();
                     SqlCommand cmd;
                     SqlDataReader dr;
                     String sql = "";
@@ -183,17 +183,15 @@ namespace WindowsFormsApp2
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private async void button5_Click(object sender, EventArgs e)
         {
-            string connetionString;
-            SqlConnection cnn;
             string ds = @"192.168.1.14\SQLEXPRESS,1434";
             connetionString = $@"Data Source={ds};User ID=AJ;Password=rawness"; //use data source to get list of databases
             using (cnn = new SqlConnection(connetionString))
             {
                 try
                 {
-                    cnn.Open();
+                    await CnnOpen();
                     SqlCommand cmd;
                     SqlDataReader dr;
                     String sql = "";

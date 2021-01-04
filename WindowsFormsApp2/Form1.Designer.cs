@@ -104,7 +104,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(172, 66);
             this.button5.TabIndex = 8;
-            this.button5.TabStop = false;
             this.button5.Text = "Retrieve All Databases";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -154,7 +153,6 @@
             this.Site.Name = "Site";
             this.Site.Size = new System.Drawing.Size(131, 27);
             this.Site.TabIndex = 12;
-            this.Site.TabStop = false;
             // 
             // Username
             // 
@@ -164,7 +162,6 @@
             this.Username.Name = "Username";
             this.Username.Size = new System.Drawing.Size(131, 27);
             this.Username.TabIndex = 13;
-            this.Username.TabStop = false;
             // 
             // Password
             // 
@@ -174,7 +171,6 @@
             this.Password.Name = "Password";
             this.Password.Size = new System.Drawing.Size(131, 27);
             this.Password.TabIndex = 14;
-            this.Password.TabStop = false;
             // 
             // label1
             // 
