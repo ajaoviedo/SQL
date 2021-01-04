@@ -186,7 +186,7 @@ namespace WindowsFormsApp2
         private async void button5_Click(object sender, EventArgs e)
         {
             string ds = @"192.168.1.14\SQLEXPRESS,1434";
-            connetionString = $@"Data Source={ds};User ID=AJ;Password=rawness"; //use data source to get list of databases
+            connetionString = $@"Data Source={ds};User ID=AJ2;Password=raw"; //use data source to get list of databases
             using (cnn = new SqlConnection(connetionString))
             {
                 try
