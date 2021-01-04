@@ -13,206 +13,165 @@ namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
-        string connetionString;
-        SqlConnection cnn;
-
-        private async Task CnnOpen() //prevent blocking when connecting to server
-        {
-            await Task.Factory.StartNew(()=> cnn.Open());
-        }
-
         public Form1()
         {
             InitializeComponent();
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            string ds = @"192.168.1.14\SQLEXPRESS,1434";
-            string db = listBox1.GetItemText(listBox1.SelectedItem);
-            connetionString = $@"Data Source={ds};Initial Catalog={db};User ID=AJ;Password=rawness";
-            using (cnn = new SqlConnection(connetionString)) //idisposable
+            try
             {
-                try
-                {
-                    await CnnOpen();
-                    SqlCommand cmd;
-                    SqlDataReader dr;
-                    String sql, outp = "";
-                    String tablename = listBox2.GetItemText(listBox2.SelectedItem); //get selected table
+                SqlCommand cmd;
+                SqlDataReader dr;
+                String sql, outp = "";
+                String tablename = listBox2.GetItemText(listBox2.SelectedItem); //get selected table
 
-                    if(tablename == "")
-                    {
-                        MessageBox.Show("Select a table");
-                        return;
-                    }
-                    sql = $"Select * from {tablename}"; //query to get all columns from table
-                    cmd = new SqlCommand(sql, cnn);
-                    dr = cmd.ExecuteReader();
-                    int i = 1;
-                    while (dr.Read())
-                    {
-                        outp += i+ ". Site: " + dr.GetValue(0) + " Username: " + dr.GetValue(1) + " Password: " + dr.GetValue(2) + "\n";
-                        i++;
-                    }
-                    String output = $"Table: {tablename}\n\n" + outp;
-                    richTextBox1.Text = output;
-                    cnn.Close();
-                }
-                catch (SqlException ex)
+                if (tablename == "")
                 {
-                    MessageBox.Show($"Cannot open connection! ErrorCode: {ex.ErrorCode} Error: {ex.Message}");
+                    MessageBox.Show("Select a table");
+                    return;
                 }
-                catch (Exception ex)
+                sql = $"Select * from {tablename}"; //query to get all columns from table
+                cmd = new SqlCommand(sql, Program.cnn);
+                dr = cmd.ExecuteReader();
+                int i = 1;
+                while (dr.Read())
                 {
-                    MessageBox.Show($"Cannot open connection! Error: {ex.Message}");
+                    outp += i + ". Site: " + dr.GetValue(0) + " Username: " + dr.GetValue(1) + " Password: " + dr.GetValue(2) + "\n";
+                    i++;
                 }
+                dr.Close();
+                String output = $"Table: {tablename}\n\n" + outp;
+                richTextBox1.Text = output;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Cannot open connection! ErrorCode: {ex.ErrorCode} Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Cannot open connection! Error: {ex.Message}");
             }
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            string ds = @"192.168.1.14\SQLEXPRESS,1434";
-            string db = listBox1.GetItemText(listBox1.SelectedItem);
-            connetionString = $@"Data Source={ds};Initial Catalog={db};User ID=AJ;Password=rawness";
-            using (cnn = new SqlConnection(connetionString))
+            try
             {
-                try
+                SqlCommand cmd;
+                String sql = "";
+                String tablename = listBox2.GetItemText(listBox2.SelectedItem); //get selected table
+                String site = Site.Text;
+                String user = Username.Text;
+                String pass = Password.Text;
+                if (site == "" || user == "" || pass == "")
                 {
-                    await CnnOpen();
-                    SqlCommand cmd;
-                    String sql = "";
-                    String tablename = listBox2.GetItemText(listBox2.SelectedItem); //get selected table
-                    String site = Site.Text;
-                    String user = Username.Text;
-                    String pass = Password.Text;
-                    if(site == "" || user == "" || pass == "")
-                    {
-                        MessageBox.Show("Fill in all fields");
-                        return;
-                    }
-                    sql = $"Insert into {tablename} values('{site}','{user}','{pass}');"; //query to add row to table
-                    cmd = new SqlCommand(sql, cnn);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show($"Succesfully added row to {tablename}");
-                    cnn.Close();
+                    MessageBox.Show("Fill in all fields");
+                    return;
                 }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show($"Cannot open connection! ErrorCode: {ex.ErrorCode} Error: {ex.Message}");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Cannot open connection! Error: {ex.Message}");
-                }
+                sql = $"Insert into {tablename} values('{site}','{user}','{pass}');"; //query to add row to table
+                cmd = new SqlCommand(sql, Program.cnn);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show($"Succesfully added row to {tablename}");
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Cannot open connection! ErrorCode: {ex.ErrorCode} Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Cannot open connection! Error: {ex.Message}");
             }
         }
 
-        private async void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            string ds = @"192.168.1.14\SQLEXPRESS,1434";
-            string db = listBox1.GetItemText(listBox1.SelectedItem);
-            connetionString = $@"Data Source={ds};Initial Catalog={db};User ID=AJ;Password=rawness";
-            using (cnn = new SqlConnection(connetionString))
+            try
             {
-                try
-                {
-                    await CnnOpen();
-                    SqlCommand cmd;
-                    String sql = "";
-                    String tablename = listBox2.GetItemText(listBox2.SelectedItem); //get selected table
+                SqlCommand cmd;
+                String sql = "";
+                String tablename = listBox2.GetItemText(listBox2.SelectedItem); //get selected table
 
-                    if (tablename == "")
-                    {
-                        MessageBox.Show("Select a table");
-                        return;
-                    }
-                    sql = $"Delete from {tablename};"; //query to delete all values from table
-                    cmd = new SqlCommand(sql, cnn);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show($"Succesfully deleted all values from {tablename}");
-                    cnn.Close();
-                }
-                catch (SqlException ex)
+                if (tablename == "")
                 {
-                    MessageBox.Show($"Cannot open connection! ErrorCode: {ex.ErrorCode} Error: {ex.Message}");
+                    MessageBox.Show("Select a table");
+                    return;
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Cannot open connection! Error: {ex.Message}");
-                }
+                sql = $"Delete from {tablename};"; //query to delete all values from table
+                cmd = new SqlCommand(sql, Program.cnn);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show($"Succesfully deleted all values from {tablename}");
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Cannot open connection! ErrorCode: {ex.ErrorCode} Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Cannot open connection! Error: {ex.Message}");
             }
         }
 
-        private async void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            string ds = @"192.168.1.14\SQLEXPRESS,1434";
-            string db = listBox1.GetItemText(listBox1.SelectedItem);
-            connetionString = $@"Data Source={ds};Initial Catalog={db};User ID=AJ;Password=rawness";
-            using (cnn = new SqlConnection(connetionString))
+            try
             {
-                try
-                {
-                    await CnnOpen();
-                    SqlCommand cmd;
-                    SqlDataReader dr;
-                    String sql = "";
+                SqlCommand cmd;
+                SqlDataReader dr;
+                String sql = "";
+                string db = listBox1.GetItemText(listBox1.SelectedItem);
 
-                    if(db == "")
-                    {
-                        MessageBox.Show("Select a database");
-                        return;
-                    }
-                    sql = $"USE {db}; SELECT * FROM sys.Tables;"; //query to see all tables in database
-                    cmd = new SqlCommand(sql, cnn);
-                    dr = cmd.ExecuteReader();
-                    listBox2.Items.Clear(); //clear previous items from listbox
-                    while (dr.Read())
-                    {
-                        listBox2.Items.Add(dr.GetValue(0)); //add each table
-                    }
-                }
-                catch (SqlException ex)
+                if (db == "")
                 {
-                    MessageBox.Show($"Cannot open connection! ErrorCode: {ex.ErrorCode} Error: {ex.Message}");
+                    MessageBox.Show("Select a database");
+                    return;
                 }
-                catch (Exception ex)
+                sql = $"USE {db}; SELECT * FROM sys.Tables;"; //query to see all tables in database
+                cmd = new SqlCommand(sql, Program.cnn);
+                dr = cmd.ExecuteReader();
+                listBox2.Items.Clear(); //clear previous items from listbox
+                while (dr.Read())
                 {
-                    MessageBox.Show($"Cannot open connection! Error: {ex.Message}");
+                    listBox2.Items.Add(dr.GetValue(0)); //add each table
                 }
+                dr.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Cannot open connection! ErrorCode: {ex.ErrorCode} Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Cannot open connection! Error: {ex.Message}");
             }
         }
 
-        private async void button5_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-            string ds = @"192.168.1.14\SQLEXPRESS,1434";
-            connetionString = $@"Data Source={ds};User ID=AJ2;Password=raw"; //use data source to get list of databases
-            using (cnn = new SqlConnection(connetionString))
+            try
             {
-                try
-                {
-                    await CnnOpen();
-                    SqlCommand cmd;
-                    SqlDataReader dr;
-                    String sql = "";
+                SqlCommand cmd;
+                SqlDataReader dr;
+                String sql = "";
 
-                    sql = $"SELECT name FROM sys.databases;"; //query to see all databases in the server
-                    cmd = new SqlCommand(sql, cnn);
-                    dr = cmd.ExecuteReader();
-                    listBox1.Items.Clear(); //clear previous items from listbox
-                    while (dr.Read())
-                    {
-                        listBox1.Items.Add(dr.GetValue(0)); //add each database
-                    }
-                }
-                catch (SqlException ex)
+                sql = $"SELECT name FROM sys.databases;"; //query to see all databases in the server
+                cmd = new SqlCommand(sql, Program.cnn);
+                dr = cmd.ExecuteReader();
+                listBox1.Items.Clear(); //clear previous items from listbox
+                while (dr.Read())
                 {
-                    MessageBox.Show($"Cannot open connection! ErrorCode: {ex.ErrorCode} Error: {ex.Message}");
+                    listBox1.Items.Add(dr.GetValue(0)); //add each database
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Cannot open connection! Error: {ex.Message}");
-                }
+                dr.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Cannot open connection! ErrorCode: {ex.ErrorCode} Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Cannot open connection! Error: {ex.Message}");
             }
         }
     }
