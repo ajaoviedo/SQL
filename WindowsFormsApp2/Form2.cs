@@ -20,7 +20,7 @@ namespace WindowsFormsApp2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string ds = @"192.168.1.14\SQLEXPRESS,1434";
+            string ds = @"10.140.244.212\SQLEXPRESS,1434"; //192.168.1.14
             string user = textBox1.Text;
             string pass = textBox2.Text;
             string connetionString = $@"Data Source={ds};User ID={user};Password={pass}"; //use data source as login and inputs as credentials
