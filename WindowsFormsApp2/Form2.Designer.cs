@@ -90,9 +90,9 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(504, 281);
+            this.button1.Location = new System.Drawing.Point(409, 279);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 48);
+            this.button1.Size = new System.Drawing.Size(113, 48);
             this.button1.TabIndex = 5;
             this.button1.Text = "Login";
             this.button1.UseVisualStyleBackColor = true;

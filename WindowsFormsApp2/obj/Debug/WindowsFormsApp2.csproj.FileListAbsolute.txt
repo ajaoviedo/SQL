@@ -8,3 +8,4 @@ C:\Users\AJ Adams\VS 2019\repos\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\Wind
 C:\Users\AJ Adams\VS 2019\repos\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.exe
 C:\Users\AJ Adams\VS 2019\repos\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.pdb
 C:\Users\AJ Adams\VS 2019\repos\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form2.resources
+C:\Users\AJ Adams\VS 2019\repos\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CoreCompileInputs.cache
